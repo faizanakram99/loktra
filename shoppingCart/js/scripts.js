@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('services.cart', [])
-  .service('Cart', ['$rootScope', 'Reviewer', function ($rootScope, Reviewer) {
+  .service('Cart', function ($rootScope, Reviewer) {
 
     //we need to use an object literal instead of array,
     //because seeking in a hash table is faster than seeking in an array.
@@ -161,4 +161,4 @@ angular.module('services.cart', [])
       refresh: refresh
     };
 
-  }]);
+  });
