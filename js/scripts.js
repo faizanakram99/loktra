@@ -35,5 +35,6 @@ angular.module('loktra', [])
                         // Note: The call will only work if you accept the permission request
                         FB.api('/me/feed', 'post', {message: 'Yay, I donated!'});
                     }, {scope: 'publish_actions'});
+                    $window.open("https://twitter.com/intent/tweet?text='Yay, I donated!'");
                 };
             });
