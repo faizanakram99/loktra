@@ -7,6 +7,7 @@ div.container{
     margin: 0 auto;
     width: 100%;
     padding: 39px 47px;
+    position: relative;
 }
 
 div.container > div{
@@ -37,7 +38,7 @@ div.arrow{
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 15px solid #424242;
-    position: relative;
+    position: absolute;
     left: 535px;
     margin-bottom: 3px;
 }
@@ -110,7 +111,7 @@ div.footer{
     justify-content: space-between;
 }
 
-div.footer button{
+div.footer button, div.footer a{
     width: 280px;
     background: rgb(250,250,250);
     height: 72px;
@@ -127,4 +128,41 @@ div.red{
 input:disabled,button:disabled {
     cursor: not-allowed;
     pointer-events: all !important;
+}
+
+@media only screen and (max-width:540px){
+    div.header{
+        height: 120px;
+    }
+}
+
+@media only screen and (max-width:700px){
+    div.arrow {
+        left: 80%;
+    }
+
+    .button-big{
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+
+    div.footer{
+        display: block;
+    }
+
+    div.footer button{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    div.red{
+        color: red;
+        font-size: 0.8em;
+    }
+
+    input:disabled,button:disabled {
+        cursor: not-allowed;
+        pointer-events: all !important;
+    }
 }
