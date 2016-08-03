@@ -1,66 +1,50 @@
 <!DOCTYPE HTML>
-<html ng-app="loktra">
+<html>
     <head>
         <title>Donation Task</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Faizan Akram Dar">
-        <meta name="description" content="Donation Task">
+        <meta name="description" content="Loktra">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/styles.css" />
-        <link rel="stylesheet" href="css/sweetalert.css" />
+        <style>
+            html{
+                height: 100%;
+            }
+
+            body{
+                height: 100%;
+            }
+
+            .wrapper{
+                margin-top: 35%;
+            }
+
+            a.links{
+                height: 100px;
+                transition: 0.5s all ease;
+                margin-bottom: 30px;
+            }
+
+            a.links span{
+                margin-top: 5%;
+                display: block;
+                font-weight: bold;
+            }
+            a.links:hover{
+                background: deepskyblue;
+                color: #fff;
+            }
+
+        </style>
     </head>
-    <body ng-controller="mainCtrl">
-        <script>
-          window.fbAsyncInit = function() {
-            FB.init({
-              appId      : '175511712860150',
-              xfbml      : true,
-              version    : 'v2.7'
-            });
-          };
-
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             js.src = "//connect.facebook.net/en_US/sdk.js";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-        </script>
+    <body>
         <div class="container">
-            <div class="header">
-                <span>${{left}}</span> still needed for this project
-            </div>
-            <div class="arrow"></div>
-
-            <div class="main">
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="{{total}}" aria-valuemin="0" aria-valuemax="1000" style="width: {{totalPercent}}">
-                    <span class="sr-only"></span>
-                  </div>
-                </div>
-                <div class="main-text">
-                    <p><span class="three-days">Only 3 days left</span> to fund this project </p>
-                    <p>Join the <strong>42</strong> other donors who have<br />already supported this project. Every <br /> dollar helps</p>
-                    <p>
-                        <form ng-submit="giveNow()" name="donateform" onsubmit="return false" novalidate>
-                            <input type="text" name="donate" ng-model="donate" class="button-big" max="999" ng-required="true" ng-pattern="numbersOnly" />
-                            <button type="submit" class="button-big" ng-disabled="donateform.$invalid">Give Now</button>
-                            <div ng-show="donateform.donate.$touched && donateform.donate.$invalid" class="red">Enter valid amount</div>
-                        </form>
-                    </p>
-                    <p><a class="why">Why give $50?</a></p>
-                </div>
-            </div>
-
-            <div class="footer">
-                <button class="btn btn-lg btn-default" ng-click="save()">Save for later</button>
-                <button class="btn btn-lg btn-default" ng-click="share()">Tell your friends</button>
+            <div class="row wrapper">
+                <a href="donationTask/index.html" class="col-xs-12 col-sm-5 links btn btn-default"><span class="h2">Donation Task</span></a>
+                <div class="col-xs-12 col-sm-2"></div>
+                <a href="shoppingCart/index.html" class="col-xs-12 col-sm-5 links btn btn-default"><span class="h2">Shopping Cart</span></a>
             </div>
         </div>
-        <script src="js/sweetalert.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-        <script src="js/scripts.js"></script>
     </body>
 </html>

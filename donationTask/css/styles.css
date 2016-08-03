@@ -111,7 +111,7 @@ div.footer{
     justify-content: space-between;
 }
 
-div.footer button{
+div.footer button, div.footer a{
     width: 280px;
     background: rgb(250,250,250);
     height: 72px;
