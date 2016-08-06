@@ -4,21 +4,20 @@ angular.module('services.cart', [])
   .service('Cart', function ($rootScope, Reviewer) {
 
 
-    var itemsDictionary = {};
+    var itemsDictionary = JSON.parse(localStorage.getItem('cart') || '{}');
 
 
     // notifies all the childs about status of cart.
 
     var refresh = function() {
-      $rootScope.$broadcast("refresh-cart");
+        $rootScope.$broadcast('refresh-cart')
     };
-
 
 
     // saves the item dictionary to the localStorage.
 
     var persist = function() {
-        window.localStorage["cart"] = JSON.stringify(itemsDictionary);
+        localStorage.setItem('cart', JSON.stringify(itemsDictionary));
     };
 
 
@@ -101,8 +100,13 @@ angular.module('services.cart', [])
     // clear the cart
 
     var clear = function() {
-      itemsDictionary = {};
-      this.save();
+        if(Object.keys(itemsDictionary).length == 0){
+            throw new Error("Cart already empty!");
+        }
+        else{
+            itemsDictionary = {};
+            this.save();
+        }
     };
 
 
@@ -113,7 +117,7 @@ angular.module('services.cart', [])
       if(typeof id === "undefined" || id === null)
         throw new Error("Cart Service error - item id is not valid");
 
-      if(itemsDictionary.hasOwnProperty(id))
+      if(!itemsDictionary.hasOwnProperty(id))
         throw new Error("Cart Service error - the id " + id + " doesn't exist");
 
       if(typeof quantity === "undefined" || quantity === null)
@@ -134,6 +138,7 @@ angular.module('services.cart', [])
       addItem: addItem,
       addItems: addItems,
       save: save,
+      persist: persist,
       remove: remove,
       clear: clear,
       changeQuantity: changeQuantity,
@@ -145,15 +150,26 @@ angular.module('services.cart', [])
     this.review = function(cart){
         var deferred = $q.defer();
         $timeout(function(){
-            var ls_cart = JSON.parse(window.localStorage['cart']);
-            if(cart.length !== Object.keys(ls_cart).length) deferred.resolve();
+            var ls_cart = JSON.parse(localStorage.getItem('cart'));
+            if(ls_cart)
+            {
+                if(cart.length !== Object.keys(ls_cart).length){
+                    deferred.resolve();
+                }
+                else
+                {
+                    cart.forEach(function(key){
+                        if(ls_cart[key.id] && ls_cart[key.id].quantity !== key.quantity) deferred.resolve();
+                    });
 
-            cart.forEach(function(key){
-                if(!ls_cart[key.id] && ls_cart[key.id].quantity !== key.quantity) deferred.resolve();
-            });
-
-            deferred.reject();
-        }, 2000);
+                    deferred.reject("Persist failed!");
+                }
+            }
+            else
+            {
+                deferred.resolve();
+            }
+        }, 100);
         return deferred.promise;
     };
 });
